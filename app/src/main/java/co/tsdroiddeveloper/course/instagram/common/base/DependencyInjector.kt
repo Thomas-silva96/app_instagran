@@ -4,13 +4,20 @@ import co.tsdroiddeveloper.course.instagram.login.data.FakeDataSource
 import co.tsdroiddeveloper.course.instagram.login.data.LoginRepository
 import co.tsdroiddeveloper.course.instagram.register.data.FakeRegisterDataSource
 import co.tsdroiddeveloper.course.instagram.register.data.RegisterRepository
+import co.tsdroiddeveloper.course.instagram.splash.data.FakeLocalDataSource
+import co.tsdroiddeveloper.course.instagram.splash.data.SplashRepository
 
 object DependencyInjector {
-    fun loginRepository() : LoginRepository {
+
+    fun splashRepository(): SplashRepository {
+        return SplashRepository(FakeLocalDataSource())
+    }
+
+    fun loginRepository(): LoginRepository {
         return LoginRepository(FakeDataSource())
     }
 
-    fun registerEmailRepository() : RegisterRepository {
+    fun registerEmailRepository(): RegisterRepository {
         return RegisterRepository(FakeRegisterDataSource())
     }
 }

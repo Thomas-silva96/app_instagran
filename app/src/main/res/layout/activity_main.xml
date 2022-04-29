@@ -13,6 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/main_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white">
@@ -35,14 +36,11 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <fragment
+        <FrameLayout
             android:id="@+id/main_fragment"
-            android:name="co.tsdroiddeveloper.course.instagram.home.view.FragmentHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:ignore="FragmentTagUsage"
-            tools:layout="@layout/fragment_home" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
