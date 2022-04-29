@@ -1,5 +1,6 @@
 package co.tsdroiddeveloper.course.instagram.register.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import co.tsdroiddeveloper.course.instagram.register.presentation.RegisterEmailP
 class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), RegisterEmail.View {
 
     private var binding: FragmentRegisterEmailBinding? = null
+    private var fragmentAttachListener: FragmentAttachListener? = null
     override lateinit var presenter: RegisterEmail.Presenter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,9 +41,17 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FragmentAttachListener){
+            fragmentAttachListener = context
+        }
+    }
+
     override fun onDestroy() {
         binding = null
         presenter.onDestroy()
+        fragmentAttachListener = null
         super.onDestroy()
     }
 
@@ -62,6 +72,7 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
     }
 
     override fun goToNameAndPasswordScree(email: String) {
+        fragmentAttachListener?.goToNameAndPasswordScreen(email)
     }
 
 }

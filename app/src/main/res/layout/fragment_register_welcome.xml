@@ -22,10 +22,11 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/register_txt_welcome"
                 android:text="@string/welcome_to_instagram"
                 style="@style/Theme.Instagram.TextViewBase.Form" />
 
-            <co.tsdroiddeveloper.course.instagram.login.view.LoadingButton
+            <co.tsdroiddeveloper.course.instagram.common.view.LoadingButton
                 android:id="@+id/register_btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -2,15 +2,13 @@ package co.tsdroiddeveloper.course.instagram.register.presentation
 
 import android.util.Patterns
 import co.tsdroiddeveloper.course.instagram.R
-import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
-import co.tsdroiddeveloper.course.instagram.login.data.LoginCallback
 import co.tsdroiddeveloper.course.instagram.register.RegisterEmail
-import co.tsdroiddeveloper.course.instagram.register.data.RegisterEmailCallback
-import co.tsdroiddeveloper.course.instagram.register.data.RegisterEmailRepository
+import co.tsdroiddeveloper.course.instagram.register.data.RegisterCallback
+import co.tsdroiddeveloper.course.instagram.register.data.RegisterRepository
 
 class RegisterEmailPresenter(
     private var view: RegisterEmail.View?,
-    private val repository: RegisterEmailRepository
+    private val repository: RegisterRepository
 ) : RegisterEmail.Presenter {
 
     override fun create(email: String) {
@@ -25,7 +23,7 @@ class RegisterEmailPresenter(
         if (isEmailValid) {
             view?.showProgress(true)
 
-            repository.create(email, object : RegisterEmailCallback{
+            repository.create(email, object : RegisterCallback{
                 override fun onSuccess() {
                     view?.goToNameAndPasswordScree(email)
                 }
