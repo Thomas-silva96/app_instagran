@@ -6,9 +6,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import co.tsdroiddeveloper.course.instagram.R
 import co.tsdroiddeveloper.course.instagram.common.base.BaseFragment
+import co.tsdroiddeveloper.course.instagram.common.base.DependencyInjector
 import co.tsdroiddeveloper.course.instagram.common.model.Post
 import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 import co.tsdroiddeveloper.course.instagram.databinding.FragmentProfileBinding
+import co.tsdroiddeveloper.course.instagram.profile.Profile
+import co.tsdroiddeveloper.course.instagram.profile.presentation.ProfilePresenter
 
 class ProfileFragment
     : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
@@ -21,7 +24,8 @@ class ProfileFragment
     private val adapter = PostAdapter()
 
     override fun setupPresenter() {
-//    presenter = ProfilePresenter(this, repository)
+        val repository = DependencyInjector.profileRepository()
+        presenter = ProfilePresenter(this, repository)
     }
 
     override fun setupView() {

@@ -1,6 +1,5 @@
-package co.tsdroiddeveloper.course.instagram.profile.view
+package co.tsdroiddeveloper.course.instagram.profile
 
-import androidx.annotation.StringRes
 import co.tsdroiddeveloper.course.instagram.common.base.BasePresenter
 import co.tsdroiddeveloper.course.instagram.common.base.BaseView
 import co.tsdroiddeveloper.course.instagram.common.model.Post

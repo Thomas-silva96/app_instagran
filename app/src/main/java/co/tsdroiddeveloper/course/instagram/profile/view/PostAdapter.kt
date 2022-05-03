@@ -11,7 +11,7 @@ import co.tsdroiddeveloper.course.instagram.common.model.Post
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
-    var items: List<Post> = mutableListOf()
+    private var items: List<Post> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder =
         PostViewHolder(
@@ -23,7 +23,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         holder.bind(items[position].uri)
     }
 
-    override fun getItemCount(): Int = 30
+    override fun getItemCount(): Int = items.size
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(image: Uri) {
