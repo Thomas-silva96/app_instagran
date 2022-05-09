@@ -4,6 +4,7 @@ import android.net.Uri
 import co.tsdroiddeveloper.course.instagram.add.Add
 import co.tsdroiddeveloper.course.instagram.add.data.AddRepository
 import co.tsdroiddeveloper.course.instagram.common.base.RequestCallback
+import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 
 class AddPresenter(
     private var view: Add.View? = null,

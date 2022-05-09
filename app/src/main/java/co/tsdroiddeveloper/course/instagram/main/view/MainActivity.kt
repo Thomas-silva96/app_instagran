@@ -9,16 +9,17 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import co.tsdroiddeveloper.course.instagram.R
-import co.tsdroiddeveloper.course.instagram.add.view.AddFragment
 import co.tsdroiddeveloper.course.instagram.common.extension.replaceFragment
 import co.tsdroiddeveloper.course.instagram.databinding.ActivityMainBinding
 import co.tsdroiddeveloper.course.instagram.home.view.HomeFragment
+import co.tsdroiddeveloper.course.instagram.post.view.AddFragment
 import co.tsdroiddeveloper.course.instagram.profile.view.ProfileFragment
 import co.tsdroiddeveloper.course.instagram.search.view.SearchFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, AddFragment.AddListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
+    AddFragment.AddListener, SearchFragment.SearchListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -83,10 +84,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_bottom_search -> {
                 if (currentFragment == searchFragment) return false
                 currentFragment = searchFragment
+                scrollToolbarEnabled = false
             }
             R.id.menu_bottom_add -> {
                 if (currentFragment == addFragment) return false
                 currentFragment = addFragment
+                scrollToolbarEnabled = false
             }
             R.id.menu_bottom_profile -> {
                 if (currentFragment == profileFragment) return false
@@ -110,5 +113,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             profileFragment.presenter.clear()
 
         binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
+    }
+
+    override fun goToProfile(uuid: String) {
+        val fragment = ProfileFragment().apply {
+            arguments = Bundle().apply {
+                putString(ProfileFragment.KEY_USER_ID, uuid)
+            }
+        }
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.main_fragment, fragment, fragment.javaClass.simpleName + "detail")
+            addToBackStack(null)
+            commit()
+        }
     }
 }

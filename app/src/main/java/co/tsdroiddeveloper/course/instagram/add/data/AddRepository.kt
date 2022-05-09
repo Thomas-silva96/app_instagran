@@ -2,6 +2,7 @@ package co.tsdroiddeveloper.course.instagram.add.data
 
 import android.net.Uri
 import co.tsdroiddeveloper.course.instagram.common.base.RequestCallback
+import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 
 class AddRepository(
     private val remoteDataSource: AddFakeRemoteDataSource,

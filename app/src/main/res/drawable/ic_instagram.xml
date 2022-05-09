@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:width="2500dp"
     android:height="2500dp"
-    android:viewportWidth="2499.9"
+    android:viewportWidth="2500"
     android:viewportHeight="2500"
     tools:ignore="VectorRaster">
   <path

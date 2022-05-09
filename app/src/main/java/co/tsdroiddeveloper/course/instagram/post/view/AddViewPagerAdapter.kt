@@ -1,4 +1,4 @@
-package co.tsdroiddeveloper.course.instagram.add.view
+package co.tsdroiddeveloper.course.instagram.post.view
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

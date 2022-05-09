@@ -1,4 +1,4 @@
-package co.tsdroiddeveloper.course.instagram.add.view
+package co.tsdroiddeveloper.course.instagram.post.view
 
 import android.net.Uri
 import android.os.Bundle

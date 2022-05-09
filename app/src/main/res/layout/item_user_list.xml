@@ -18,28 +18,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/home_txt_username"
+        android:id="@+id/search_txt_username"
         style="@style/Theme.Instagram.TextViewBase"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/home_txt_name"
-        app:layout_constraintStart_toEndOf="@+id/search_img_user"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/home_txt_name"
-        style="@style/Theme.Instagram.TextViewBase"
-        android:layout_width="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_height="wrap_content"
         android:text="@string/username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_img_user"
-        app:layout_constraintTop_toBottomOf="@+id/home_txt_username" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

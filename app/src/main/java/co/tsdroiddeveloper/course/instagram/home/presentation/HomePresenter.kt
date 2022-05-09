@@ -5,8 +5,6 @@ import co.tsdroiddeveloper.course.instagram.common.model.Post
 import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 import co.tsdroiddeveloper.course.instagram.home.Home
 import co.tsdroiddeveloper.course.instagram.home.data.HomeRepository
-import co.tsdroiddeveloper.course.instagram.home.view.HomeFragment
-import co.tsdroiddeveloper.course.instagram.profile.Profile
 import co.tsdroiddeveloper.course.instagram.profile.data.ProfileRepository
 
 class HomePresenter(
