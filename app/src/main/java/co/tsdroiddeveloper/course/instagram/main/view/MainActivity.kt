@@ -9,7 +9,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import co.tsdroiddeveloper.course.instagram.R
-import co.tsdroiddeveloper.course.instagram.camera.view.CameraFragment
+import co.tsdroiddeveloper.course.instagram.add.view.AddFragment
 import co.tsdroiddeveloper.course.instagram.common.extension.replaceFragment
 import co.tsdroiddeveloper.course.instagram.databinding.ActivityMainBinding
 import co.tsdroiddeveloper.course.instagram.home.view.HomeFragment
@@ -18,14 +18,15 @@ import co.tsdroiddeveloper.course.instagram.search.view.SearchFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, AddFragment.AddListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var homeFragment: Fragment
+
+    private lateinit var homeFragment: HomeFragment
     private lateinit var searchFragment: Fragment
-    private lateinit var cameraFragment: Fragment
-    private lateinit var profileFragment: Fragment
-    private lateinit var currentFragment: Fragment
+    private lateinit var addFragment: Fragment
+    private lateinit var profileFragment: ProfileFragment
+    private var currentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,29 +50,20 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         homeFragment = HomeFragment()
         searchFragment = SearchFragment()
-        cameraFragment = CameraFragment()
+        addFragment = AddFragment()
         profileFragment = ProfileFragment()
 
-        currentFragment = homeFragment
-
-        supportFragmentManager.beginTransaction().apply {
-            add(R.id.main_fragment, profileFragment, "3").hide(profileFragment)
-            add(R.id.main_fragment, cameraFragment, "2").hide(cameraFragment)
-            add(R.id.main_fragment, searchFragment, "1").hide(searchFragment)
-            add(R.id.main_fragment, homeFragment, "0")
-            commit()
-        }
-
         binding.mainBottomNav.setOnNavigationItemSelectedListener(this)
-       // binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
+        binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
     }
 
     private fun setScrolltoolbarEnabled(enabled: Boolean) {
         val params = binding.mainToolbar.layoutParams as AppBarLayout.LayoutParams
         val coordinatParams = binding.mainAppbar.layoutParams as CoordinatorLayout.LayoutParams
 
-        if(enabled) {
-            params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+        if (enabled) {
+            params.scrollFlags =
+                AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
             coordinatParams.behavior = AppBarLayout.Behavior()
         } else {
             params.scrollFlags = 0
@@ -82,33 +74,41 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var scrollToolbarEnabled = false
+
         when (item.itemId) {
             R.id.menu_bottom_home -> {
                 if (currentFragment == homeFragment) return false
-                supportFragmentManager.beginTransaction().hide(currentFragment).show(homeFragment).commit()
                 currentFragment = homeFragment
             }
             R.id.menu_bottom_search -> {
                 if (currentFragment == searchFragment) return false
-                supportFragmentManager.beginTransaction().hide(currentFragment).show(searchFragment).commit()
                 currentFragment = searchFragment
             }
             R.id.menu_bottom_add -> {
-                if (currentFragment == cameraFragment) return false
-                supportFragmentManager.beginTransaction().hide(currentFragment).show(cameraFragment).commit()
-                currentFragment = cameraFragment
+                if (currentFragment == addFragment) return false
+                currentFragment = addFragment
             }
             R.id.menu_bottom_profile -> {
                 if (currentFragment == profileFragment) return false
-                supportFragmentManager.beginTransaction().hide(currentFragment).show(profileFragment).commit()
                 currentFragment = profileFragment
                 scrollToolbarEnabled = true
             }
         }
+
         setScrolltoolbarEnabled(scrollToolbarEnabled)
-        /*currentFragment?.let {
+
+        currentFragment?.let {
             replaceFragment(R.id.main_fragment, it)
-        }*/
+        }
         return true
+    }
+
+    override fun onPostCreated() {
+        homeFragment.presenter.clear()
+
+        if (supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null)
+            profileFragment.presenter.clear()
+
+        binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
     }
 }

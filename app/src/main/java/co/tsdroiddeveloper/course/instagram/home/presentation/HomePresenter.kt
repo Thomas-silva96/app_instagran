@@ -1,34 +1,22 @@
-package co.tsdroiddeveloper.course.instagram.profile.presentation
+package co.tsdroiddeveloper.course.instagram.home.presentation
 
 import co.tsdroiddeveloper.course.instagram.common.base.RequestCallback
 import co.tsdroiddeveloper.course.instagram.common.model.Post
 import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
+import co.tsdroiddeveloper.course.instagram.home.Home
+import co.tsdroiddeveloper.course.instagram.home.data.HomeRepository
+import co.tsdroiddeveloper.course.instagram.home.view.HomeFragment
 import co.tsdroiddeveloper.course.instagram.profile.Profile
 import co.tsdroiddeveloper.course.instagram.profile.data.ProfileRepository
 
-class ProfilePresenter(
-    private var view: Profile.View?,
-    private val repository: ProfileRepository
-) : Profile.Presenter {
+class HomePresenter(
+    private var view: Home.View?,
+    private val repository: HomeRepository
+) : Home.Presenter {
 
-    override fun fetchUserProfile() {
+    override fun fetchFeed() {
         view?.showProgress(true)
-        repository.fetchUserProfile(object : RequestCallback<UserAuth> {
-            override fun onSuccess(data: UserAuth) {
-                view?.displayUserProfile(data)
-            }
-
-            override fun onFailure(message: String) {
-                view?.displayRequestFailure(message)
-            }
-
-            override fun onComplete() {
-            }
-        })
-    }
-
-    override fun fetchUserPost() {
-        repository.fetchUserPosts(object : RequestCallback<List<Post>> {
+        repository.fetchFeed(object : RequestCallback<List<Post>> {
             override fun onSuccess(data: List<Post>) {
                 if (data.isEmpty()) {
                     view?.displayEmptyPosts()

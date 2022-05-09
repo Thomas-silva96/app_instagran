@@ -39,12 +39,14 @@ class ProfileFragment
         binding?.profileProgress?.visibility = if (enabled) View.VISIBLE else View.GONE
     }
 
+    @SuppressLint("SetTextI18n")
     override fun displayUserProfile(userAuth: UserAuth) {
         binding?.profileTxtPostsCount?.text = userAuth.postCount.toString()
         binding?.profileTxtFollowerCount?.text = userAuth.followersCount.toString()
         binding?.profileTxtFollowingCount?.text = userAuth.followingCount.toString()
         binding?.profileTxtUsername?.text = userAuth.name
         binding?.profileTxtBio?.text = "Todo"
+        binding?.profileImgIcon?.setImageURI(userAuth.photoUri)
         presenter.fetchUserPost()
     }
 
@@ -61,11 +63,10 @@ class ProfileFragment
     override fun displayFullPosts(posts: List<Post>) {
         binding?.profileTxtEmpty?.visibility = View.GONE
         binding?.profileRv?.visibility = View.VISIBLE
+        adapter.items = posts
         adapter.notifyDataSetChanged()
     }
 
-    override fun getMenu(): Int {
-        return R.menu.menu_profile
-    }
+    override fun getMenu() = R.menu.menu_profile
 
 }

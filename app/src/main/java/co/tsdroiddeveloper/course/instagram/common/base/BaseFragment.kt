@@ -40,7 +40,10 @@ abstract class BaseFragment<T, P : BasePresenter>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = bind(view)
-        setupView()
+
+        if (savedInstanceState == null) {
+            setupView()
+        }
     }
 
     abstract fun setupView()

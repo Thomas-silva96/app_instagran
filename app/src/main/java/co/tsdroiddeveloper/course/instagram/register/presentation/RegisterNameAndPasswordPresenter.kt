@@ -21,9 +21,9 @@ class RegisterNameAndPasswordPresenter(
             view?.displayNameFailure(null)
         }
 
-        if (!isConfirmValid){
+        if (!isConfirmValid) {
             view?.displayPasswordFailure(R.string.password_not_equal)
-        } else{
+        } else {
             if (!isPasswordValid) {
                 view?.displayPasswordFailure(R.string.invalid_password)
             } else {

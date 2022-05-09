@@ -1,10 +1,9 @@
 package co.tsdroiddeveloper.course.instagram.register.data
 
 import android.net.Uri
-import android.os.Looper
 import android.os.Handler
+import android.os.Looper
 import co.tsdroiddeveloper.course.instagram.common.model.DataBase
-import co.tsdroiddeveloper.course.instagram.common.model.Photo
 import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 import java.util.*
 
@@ -31,12 +30,17 @@ class FakeRegisterDataSource : RegisterDataSource {
             if (userAuth != null) {
                 callback.onFailure("Usuário já cadastrado")
             } else {
-                val newUser = UserAuth(UUID.randomUUID().toString(), name, email, password)
+                val newUser = UserAuth(UUID.randomUUID().toString(), name, email, password, null)
 
                 val created = DataBase.usersAuth.add(newUser)
 
                 if (created) {
                     DataBase.sessionAuth = newUser
+
+                    DataBase.followers[newUser.uuid] = hashSetOf()
+                    DataBase.posts[newUser.uuid] = hashSetOf()
+                    DataBase.feeds[newUser.uuid] = hashSetOf()
+
                     callback.onSuccess()
                 } else {
                     callback.onFailure("Erro interno no servidor.")
@@ -54,15 +58,12 @@ class FakeRegisterDataSource : RegisterDataSource {
             if (userAuth == null) {
                 callback.onFailure("Usuário não encontrado")
             } else {
-                val newPhoto = Photo(userAuth.uuid, photoUri)
 
-                val created = DataBase.photos.add(newPhoto)
+                val index = DataBase.usersAuth.indexOf(DataBase.sessionAuth)
+                DataBase.usersAuth[index] = DataBase.sessionAuth!!.copy(photoUri = photoUri)
+                DataBase.sessionAuth = DataBase.usersAuth[index]
 
-                if (created) {
-                    callback.onSuccess()
-                } else {
-                    callback.onFailure("Erro interno no servidor.")
-                }
+                callback.onSuccess()
             }
             callback.onComplete()
         }, 2000)
