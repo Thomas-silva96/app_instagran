@@ -1,7 +1,7 @@
 package co.tsdroiddeveloper.course.instagram.search.presentation
 
 import co.tsdroiddeveloper.course.instagram.common.base.RequestCallback
-import co.tsdroiddeveloper.course.instagram.common.model.Post
+import co.tsdroiddeveloper.course.instagram.common.model.User
 import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 import co.tsdroiddeveloper.course.instagram.search.Search
 import co.tsdroiddeveloper.course.instagram.search.data.SearchRepository
@@ -13,8 +13,8 @@ class SearchPresenter(
 
     override fun fetchUsers(name: String) {
         view?.showProgress(true)
-        repository.fetchUser(name, object : RequestCallback<List<UserAuth>> {
-            override fun onSuccess(data: List<UserAuth>) {
+        repository.fetchUser(name, object : RequestCallback<List<User>> {
+            override fun onSuccess(data: List<User>) {
                 if (data.isEmpty()) {
                     view?.displauEmptyUsers()
                 } else {

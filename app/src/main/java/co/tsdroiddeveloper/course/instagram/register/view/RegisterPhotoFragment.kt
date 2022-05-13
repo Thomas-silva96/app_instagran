@@ -77,19 +77,6 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo), Regist
         fragmentAttachListener?.goToMainScreen()
     }
 
-    private fun onCropImageResult(uri: Uri?) {
-        if (uri != null) {
-            val bitmap = if (Build.VERSION.SDK_INT >= 28) {
-                val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
-                ImageDecoder.decodeBitmap(source)
-            } else {
-                MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
-            }
-            binding?.registerImgProfile?.setImageBitmap(bitmap)
-            presenter.updateUser(uri)
-        }
-    }
-
     private fun openDialog() {
         val customDialog = CustomDialog(requireContext())
         customDialog.addButton(R.string.photo, R.string.gallery) {
@@ -103,5 +90,18 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo), Regist
             }
         }
         customDialog.show()
+    }
+
+    private fun onCropImageResult(uri: Uri?) {
+        if (uri != null) {
+            val bitmap = if (Build.VERSION.SDK_INT >= 28) {
+                val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
+                ImageDecoder.decodeBitmap(source)
+            } else {
+                MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+            }
+            binding?.registerImgProfile?.setImageBitmap(bitmap)
+            presenter.updateUser(uri)
+        }
     }
 }

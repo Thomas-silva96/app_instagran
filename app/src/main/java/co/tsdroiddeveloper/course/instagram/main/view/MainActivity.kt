@@ -1,5 +1,6 @@
 package co.tsdroiddeveloper.course.instagram.main.view
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -12,14 +13,17 @@ import co.tsdroiddeveloper.course.instagram.R
 import co.tsdroiddeveloper.course.instagram.common.extension.replaceFragment
 import co.tsdroiddeveloper.course.instagram.databinding.ActivityMainBinding
 import co.tsdroiddeveloper.course.instagram.home.view.HomeFragment
+import co.tsdroiddeveloper.course.instagram.main.LogoutListener
 import co.tsdroiddeveloper.course.instagram.post.view.AddFragment
 import co.tsdroiddeveloper.course.instagram.profile.view.ProfileFragment
 import co.tsdroiddeveloper.course.instagram.search.view.SearchFragment
+import co.tsdroiddeveloper.course.instagram.splash.view.SplashActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
-    AddFragment.AddListener, SearchFragment.SearchListener {
+    AddFragment.AddListener, SearchFragment.SearchListener, LogoutListener,
+    ProfileFragment.FollowListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -58,19 +62,20 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
     }
 
-    private fun setScrolltoolbarEnabled(enabled: Boolean) {
+
+    private fun setScrollToolbarEnabled(enabled: Boolean) {
         val params = binding.mainToolbar.layoutParams as AppBarLayout.LayoutParams
-        val coordinatParams = binding.mainAppbar.layoutParams as CoordinatorLayout.LayoutParams
+        val coordinateParams = binding.mainAppbar.layoutParams as CoordinatorLayout.LayoutParams
 
         if (enabled) {
             params.scrollFlags =
                 AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
-            coordinatParams.behavior = AppBarLayout.Behavior()
+            coordinateParams.behavior = AppBarLayout.Behavior()
         } else {
             params.scrollFlags = 0
-            coordinatParams.behavior = null
+            coordinateParams.behavior = null
         }
-        binding.mainAppbar.layoutParams = coordinatParams
+        binding.mainAppbar.layoutParams = coordinateParams
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -98,21 +103,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
 
-        setScrolltoolbarEnabled(scrollToolbarEnabled)
+        setScrollToolbarEnabled(scrollToolbarEnabled)
 
         currentFragment?.let {
             replaceFragment(R.id.main_fragment, it)
         }
         return true
-    }
-
-    override fun onPostCreated() {
-        homeFragment.presenter.clear()
-
-        if (supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null)
-            profileFragment.presenter.clear()
-
-        binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
     }
 
     override fun goToProfile(uuid: String) {
@@ -127,4 +123,36 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             commit()
         }
     }
+
+    override fun onPostCreated() {
+        homeFragment.presenter.clear()
+
+        if (supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null)
+            profileFragment.presenter.clear()
+
+        binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
+    }
+
+    override fun followUpdated() {
+        homeFragment.presenter.clear()
+
+        if (supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null) {
+            profileFragment.presenter.clear()
+        }
+    }
+
+    override fun logout() {
+        if (supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null) {
+            profileFragment.presenter.clear()
+        }
+
+        homeFragment.presenter.clear()
+        homeFragment.presenter.logout()
+
+        val intent = Intent(baseContext, SplashActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
+
 }

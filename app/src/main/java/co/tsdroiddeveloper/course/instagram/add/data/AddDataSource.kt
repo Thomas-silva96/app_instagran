@@ -2,7 +2,6 @@ package co.tsdroiddeveloper.course.instagram.add.data
 
 import android.net.Uri
 import co.tsdroiddeveloper.course.instagram.common.base.RequestCallback
-import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 
 interface AddDataSource {
 
@@ -15,7 +14,7 @@ interface AddDataSource {
         throw UnsupportedOperationException()
     }
 
-    fun fetchSession(): UserAuth {
+    fun fetchSession(): String {
         throw UnsupportedOperationException()
     }
 }

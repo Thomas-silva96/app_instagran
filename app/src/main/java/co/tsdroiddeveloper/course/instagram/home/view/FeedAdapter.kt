@@ -3,11 +3,12 @@ package co.tsdroiddeveloper.course.instagram.home.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.tsdroiddeveloper.course.instagram.R
 import co.tsdroiddeveloper.course.instagram.common.model.Post
+import co.tsdroiddeveloper.course.instagram.common.model.User
+import com.bumptech.glide.Glide
 
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
@@ -26,9 +27,10 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(post: Post) {
-            itemView.findViewById<ImageView>(R.id.home_img_post).setImageURI(post.uri)
-            itemView.findViewById<ImageView>(R.id.home_img_user).setImageURI(post.publisher.photoUri)
-            itemView.findViewById<TextView>(R.id.home_txt_username).text = post.publisher.name
+
+            Glide.with(itemView.context).load(post.photoUrl).into(itemView.findViewById(R.id.home_img_post))
+            Glide.with(itemView.context).load(post.publisher?.photoUrl).into(itemView.findViewById(R.id.home_img_user))
+            itemView.findViewById<TextView>(R.id.home_txt_username).text = post.publisher?.name
             itemView.findViewById<TextView>(R.id.home_txt_caption).text = post.caption
         }
 

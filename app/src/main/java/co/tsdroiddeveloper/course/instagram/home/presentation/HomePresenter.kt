@@ -2,10 +2,9 @@ package co.tsdroiddeveloper.course.instagram.home.presentation
 
 import co.tsdroiddeveloper.course.instagram.common.base.RequestCallback
 import co.tsdroiddeveloper.course.instagram.common.model.Post
-import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
+import co.tsdroiddeveloper.course.instagram.common.model.User
 import co.tsdroiddeveloper.course.instagram.home.Home
 import co.tsdroiddeveloper.course.instagram.home.data.HomeRepository
-import co.tsdroiddeveloper.course.instagram.profile.data.ProfileRepository
 
 class HomePresenter(
     private var view: Home.View?,
@@ -31,6 +30,10 @@ class HomePresenter(
                 view?.showProgress(false)
             }
         })
+    }
+
+    override fun logout() {
+        repository.logout()
     }
 
     override fun clear() {

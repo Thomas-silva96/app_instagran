@@ -1,6 +1,8 @@
 package co.tsdroiddeveloper.course.instagram.home.view
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +13,7 @@ import co.tsdroiddeveloper.course.instagram.common.model.Post
 import co.tsdroiddeveloper.course.instagram.databinding.FragmentHomeBinding
 import co.tsdroiddeveloper.course.instagram.home.Home
 import co.tsdroiddeveloper.course.instagram.home.presentation.HomePresenter
+import co.tsdroiddeveloper.course.instagram.main.LogoutListener
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, Home.Presenter>(
     R.layout.fragment_home,
@@ -19,6 +22,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, Home.Presenter>(
 
     override lateinit var presenter: Home.Presenter
     private val adapter = FeedAdapter()
+    private var logoutListener: LogoutListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is LogoutListener) {
+            logoutListener = context
+        }
+    }
 
     override fun setupView() {
         binding?.homeRv?.layoutManager = LinearLayoutManager(requireContext())
@@ -52,5 +63,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, Home.Presenter>(
         binding?.homeRv?.visibility = View.VISIBLE
         adapter.items = posts
         adapter.notifyDataSetChanged()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_logout -> {
+                logoutListener?.logout()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -2,6 +2,7 @@ package co.tsdroiddeveloper.course.instagram.profile.data
 
 import co.tsdroiddeveloper.course.instagram.common.base.Cache
 import co.tsdroiddeveloper.course.instagram.common.model.Post
+import co.tsdroiddeveloper.course.instagram.common.model.User
 
 object PostListMemoryCache : Cache<List<Post>> {
 

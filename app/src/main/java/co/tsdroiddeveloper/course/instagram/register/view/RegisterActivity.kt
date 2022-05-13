@@ -103,6 +103,13 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
         }
     }
 
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile("JPEG_${timestamp}_", ".jpeg", dir)
+    }
+
     private fun replaceFragment(fragment: Fragment) {
         replaceFragment(R.id.register_fragment, fragment)
         hideKeyboard()
@@ -115,12 +122,5 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
             }
         }
         replaceFragment(fragment)
-    }
-
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("JPEG_$(timestamp)_", ".jpeg", dir)
     }
 }

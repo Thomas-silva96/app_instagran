@@ -1,14 +1,14 @@
 package co.tsdroiddeveloper.course.instagram.splash.data
 
-import co.tsdroiddeveloper.course.instagram.common.model.DataBase
+import com.google.firebase.auth.FirebaseAuth
 
-class FakeLocalDataSource : SplashDataSource {
+class FireSplashDataSource : SplashDataSource{
+
     override fun session(callback: SplashCallback) {
-        if (DataBase.sessionAuth != null) {
+        if (FirebaseAuth.getInstance().uid != null) {
             callback.onSuccess()
         } else {
             callback.onFailure()
         }
     }
-
 }

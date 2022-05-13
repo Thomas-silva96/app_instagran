@@ -1,6 +1,7 @@
 package co.tsdroiddeveloper.course.instagram.profile.view
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -10,10 +11,12 @@ import co.tsdroiddeveloper.course.instagram.R
 import co.tsdroiddeveloper.course.instagram.common.base.BaseFragment
 import co.tsdroiddeveloper.course.instagram.common.base.DependencyInjector
 import co.tsdroiddeveloper.course.instagram.common.model.Post
-import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
+import co.tsdroiddeveloper.course.instagram.common.model.User
 import co.tsdroiddeveloper.course.instagram.databinding.FragmentProfileBinding
+import co.tsdroiddeveloper.course.instagram.main.LogoutListener
 import co.tsdroiddeveloper.course.instagram.profile.Profile
 import co.tsdroiddeveloper.course.instagram.profile.presentation.ProfilePresenter
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProfileFragment
@@ -26,6 +29,19 @@ class ProfileFragment
 
     private val adapter = PostAdapter()
     private var uuid: String? = null
+
+    private var logoutListener: LogoutListener? = null
+    private var followListener: FollowListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is LogoutListener) {
+            logoutListener = context
+        }
+        if (context is FollowListener) {
+            followListener = context
+        }
+    }
 
     override fun setupPresenter() {
         val repository = DependencyInjector.profileRepository()
@@ -59,15 +75,18 @@ class ProfileFragment
     }
 
     @SuppressLint("SetTextI18n")
-    override fun displayUserProfile(userAuth: Pair<UserAuth, Boolean?>) {
-        val (user, following) = userAuth
+    override fun displayUserProfile(user: Pair<User, Boolean?>) {
+        val (userAuth, following) = user
 
-        binding?.profileTxtPostsCount?.text = user.postCount.toString()
-        binding?.profileTxtFollowerCount?.text = user.followersCount.toString()
-        binding?.profileTxtFollowingCount?.text = user.followingCount.toString()
-        binding?.profileTxtUsername?.text = user.name
+        binding?.profileTxtPostsCount?.text = userAuth.postCount.toString()
+        binding?.profileTxtFollowerCount?.text = userAuth.followers.toString()
+        binding?.profileTxtFollowingCount?.text = userAuth.following.toString()
+        binding?.profileTxtUsername?.text = userAuth.name
         binding?.profileTxtBio?.text = "Todo"
-        binding?.profileImgIcon?.setImageURI(user.photoUri)
+
+        binding?.let {
+            Glide.with(requireContext()).load(userAuth.photoUrl).into(it.profileImgIcon)
+        }
 
         binding?.profileBtnEditProfile?.text = when (following) {
             null -> getString(R.string.edit_profile)
@@ -96,6 +115,10 @@ class ProfileFragment
         adapter.notifyDataSetChanged()
     }
 
+    override fun followUpdated() {
+        followListener?.followUpdated()
+    }
+
     override fun getMenu() = R.menu.menu_profile
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -108,6 +131,20 @@ class ProfileFragment
             }
         }
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_logout -> {
+                logoutListener?.logout()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    interface FollowListener {
+        fun followUpdated()
     }
 
     companion object {

@@ -2,6 +2,8 @@ package co.tsdroiddeveloper.course.instagram.search
 
 import co.tsdroiddeveloper.course.instagram.common.base.BasePresenter
 import co.tsdroiddeveloper.course.instagram.common.base.BaseView
+import co.tsdroiddeveloper.course.instagram.common.model.Post
+import co.tsdroiddeveloper.course.instagram.common.model.User
 import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 
 interface Search {
@@ -12,7 +14,7 @@ interface Search {
 
     interface View: BaseView<Presenter> {
         fun showProgress(enabled: Boolean)
-        fun displayFullUsers(users: List<UserAuth>)
+        fun displayFullUsers(users: List<User>)
         fun displauEmptyUsers()
     }
 

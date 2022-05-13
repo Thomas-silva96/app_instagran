@@ -2,16 +2,15 @@ package co.tsdroiddeveloper.course.instagram.add.data
 
 import android.net.Uri
 import co.tsdroiddeveloper.course.instagram.common.base.RequestCallback
-import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
 
 class AddRepository(
-    private val remoteDataSource: AddFakeRemoteDataSource,
+    private val remoteDataSource: FireAddDataSource,
     private val localDataSource: AddLocalDataSource
 ) {
     fun createPost(uri: Uri, caption: String, callback: RequestCallback<Boolean>) {
-        val userAuth = localDataSource.fetchSession()
+        val uuid = localDataSource.fetchSession()
 
-        remoteDataSource.createPost(userAuth.uuid, uri, caption, object : RequestCallback<Boolean> {
+        remoteDataSource.createPost(uuid, uri, caption, object : RequestCallback<Boolean> {
             override fun onSuccess(data: Boolean) {
                 callback.onSuccess(data)
             }

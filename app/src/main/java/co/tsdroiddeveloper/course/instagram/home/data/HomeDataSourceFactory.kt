@@ -2,6 +2,7 @@ package co.tsdroiddeveloper.course.instagram.home.data
 
 import co.tsdroiddeveloper.course.instagram.common.base.Cache
 import co.tsdroiddeveloper.course.instagram.common.model.Post
+import co.tsdroiddeveloper.course.instagram.common.model.User
 
 class HomeDataSourceFactory(
     private val feedCache: Cache<List<Post>>
@@ -10,10 +11,14 @@ class HomeDataSourceFactory(
         return HomeLocalDataSource(feedCache)
     }
 
+    fun createRemoteDataSource(): HomeDataSource {
+        return FireHomeDataSource()
+    }
+
     fun createFromFeed(): HomeDataSource {
         if (feedCache.isCached()) {
             return HomeLocalDataSource(feedCache)
         }
-        return HomeFakeRemoteDataSource()
+        return FireHomeDataSource()
     }
 }

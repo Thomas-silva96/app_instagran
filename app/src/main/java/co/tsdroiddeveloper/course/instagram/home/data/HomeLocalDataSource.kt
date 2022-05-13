@@ -2,9 +2,9 @@ package co.tsdroiddeveloper.course.instagram.home.data
 
 import co.tsdroiddeveloper.course.instagram.common.base.Cache
 import co.tsdroiddeveloper.course.instagram.common.base.RequestCallback
-import co.tsdroiddeveloper.course.instagram.common.model.DataBase
 import co.tsdroiddeveloper.course.instagram.common.model.Post
-import co.tsdroiddeveloper.course.instagram.common.model.UserAuth
+import co.tsdroiddeveloper.course.instagram.common.model.User
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeLocalDataSource(
     private val feedCache: Cache<List<Post>>
@@ -20,8 +20,8 @@ class HomeLocalDataSource(
         callback.onComplete()
     }
 
-    override fun fetchSession(): UserAuth {
-        return DataBase.sessionAuth ?: throw RuntimeException("Usuário não logado!!!")
+    override fun fetchSession(): String {
+        return FirebaseAuth.getInstance().uid ?: throw RuntimeException("Usuário não logado!!!")
     }
 
     override fun putFeed(response: List<Post>?) {

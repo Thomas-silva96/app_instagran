@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "567032803284",
+    "project_id": "instagram-kotlin-a5ef0",
+    "storage_bucket": "instagram-kotlin-a5ef0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567032803284:android:270f777d00510a8e12f041",
+        "android_client_info": {
+          "package_name": "co.tsdroiddeveloper.course.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567032803284-j7qmlsh0sb0osaik4f33pfav91qb6kh4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHXdL-VZu9QsRAnyFvZe3qx5DIPijwcIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567032803284-j7qmlsh0sb0osaik4f33pfav91qb6kh4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
