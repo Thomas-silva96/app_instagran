@@ -3,6 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/button_backgrouns_circle_disabled.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/edit_text_background.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_close.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_add.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_add_profile.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_camera.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_comment.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_heart.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_home.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_listed.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_profile.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_search.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_insta_send.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_instagram.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/drawable/ic_more.xml" value="0.2285" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/activity_add.xml" value="0.20652173913043478" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/activity_main.xml" value="0.20652173913043478" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/dialog_custom.xml" value="0.20652173913043478" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/fragment_add.xml" value="0.20652173913043478" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/fragment_profile.xml" value="0.202275600505689" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/fragment_register_email.xml" value="0.20652173913043478" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/fragment_register_name_password.xml" value="0.20652173913043478" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/fragment_register_photo.xml" value="0.20652173913043478" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/fragment_register_welcome.xml" value="0.20652173913043478" />
+        <entry key="..\:/AndroidStudioProjects/app_instagran/app/src/main/res/layout/item_profile_grid.xml" value="0.20652173913043478" />
         <entry key="..\:/Users/thoma/AndroidStudioProjects/Instagram/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.147" />
         <entry key="..\:/Users/thoma/AndroidStudioProjects/Instagram/app/src/main/res/drawable/button_background_circle.xml" value="0.124" />
         <entry key="..\:/Users/thoma/AndroidStudioProjects/Instagram/app/src/main/res/drawable/button_backgrouns_circle.xml" value="0.147" />
@@ -53,7 +80,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
